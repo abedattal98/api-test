@@ -1,7 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const { MongoClient } = require('mongodb');
-// const client = new MongoClient(uri);
 
 // create express app
 const app = express();
@@ -31,12 +29,33 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
+
+// import jsonwebtoken
+const jwt = require('jsonwebtoken');
+
+// Token Verification 
+app.use((req, res, next) => {
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
+        jwt.verify(req.headers.authorization.split(' ')[1], 'RESTfulAPIs', (err, decode) => {
+            if (err) req.user = undefined;
+            req.user = decode;
+            next();
+        });
+    } else {
+        req.user = undefined;
+        next();
+    }
+});
+
+
 // define a simple route
 app.get('/', (req, res) => {
     res.json({ "message": "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes." });
 });
 
-require('./app/routes/note.routes.js')(app);
+//require('./app/routes/note.routes.js')(app);
+var routes = require('./app/routes/note.routes.js'); //importing route   
+routes(app);
 
 // listen for requests
 app.listen(3000, () => {
