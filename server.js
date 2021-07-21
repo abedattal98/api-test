@@ -54,9 +54,10 @@ app.get('/', (req, res) => {
 });
 
 //require('./app/routes/note.routes.js')(app);
-var routes = require('./app/routes/note.routes.js'); //importing route   
+var routes = require('./app/routes/note.routes.js') //importing route   
 routes(app);
-
+var routess =  require('./app/routes/login.routes.js'); //importing route   
+routess(app);
 // listen for requests
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");

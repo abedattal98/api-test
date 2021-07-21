@@ -27,10 +27,10 @@ module.exports = (app) => {
     // // Delete a Note with noteId
     // app.delete('/notes/:noteId', notes.delete);
 
-    app
-        .route("/auth/register")
-        .post(userHandlers.register);
-    app
-        .route("/auth/sign_in")
-        .post(userHandlers.signIn);
+    // app
+    //     .route("/auth/register")
+    //     .post(userHandlers.register);
+    // app
+    //     .route("/auth/sign_in")
+    //     .post(userHandlers.signIn);
 }
