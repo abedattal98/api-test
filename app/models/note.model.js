@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const NoteSchema = mongoose.Schema({
-    title: String,
+    title: { type: String, required: true },
     content: String
 }, {
     timestamps: true
